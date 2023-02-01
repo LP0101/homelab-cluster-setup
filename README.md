@@ -216,3 +216,11 @@ Download the CRDs:
 Modify the CRDs to match your ip range
 
 `kubectl create -f custom-resources.yaml`
+
+### Approve CSRs
+
+`k get csr`
+
+`k certificate approve $CSR`
+
+### Install metrics server
