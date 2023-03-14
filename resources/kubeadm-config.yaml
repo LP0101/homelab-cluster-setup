@@ -1,11 +1,24 @@
-# kubeadm-config.yaml
-kind: ClusterConfiguration
+apiServer:
+  certSANs:
+  - 192.168.10.70
+  - minas-tirith.popesco.io
+  extraArgs:
+    authorization-mode: Node,RBAC
+  timeoutForControlPlane: 4m0s
 apiVersion: kubeadm.k8s.io/v1beta3
+controlPlaneEndpoint: minas-tirith.popesco.io
+certificatesDir: /etc/kubernetes/pki
+clusterName: kubernetes
+controllerManager: {}
+dns: {}
+etcd:
+  local:
+    dataDir: /var/lib/etcd
+imageRepository: registry.k8s.io
+kind: ClusterConfiguration
 kubernetesVersion: v1.26.1
 networking:
+  dnsDomain: cluster.local
   podSubnet: 10.0.0.0/8
----
-kind: KubeletConfiguration
-apiVersion: kubelet.config.k8s.io/v1beta1
-cgroupDriver: systemd
-serverTLSBootstrap: true
+  serviceSubnet: 10.96.0.0/12
+scheduler: {}
